@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Novo</title>
+    </head>
+    <body>
+        <h1>Novo Contato</h1>
+        <form action="" method="POST">
+            {% csrf_token %}
+            <input type="text" name="nome" required/>
+            <input type="email" name="email" required/>
+            <input type="submit" name="salvar"/>
+        </form>
+    </body>
+</html>
