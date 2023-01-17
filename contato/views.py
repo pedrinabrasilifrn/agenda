@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.template import RequestContext
 from .models import Contato
 from django.contrib import messages
+from django.utils.datastructures import MultiValueDictKeyError
 
 # Create your views here.
 def index(request):
@@ -12,12 +13,15 @@ def novo(request):
     if request.POST:
         n = str(request.POST.get('nome'))
         e = str(request.POST.get('email'))
+        i =  request.FILES['imagem']
 
-        c = Contato(nome = n, email = e)
+        c = Contato(nome = n, email = e, imagem=i)
         c.save()
         return redirect('contato:inicio')
     else:    
         return render(request, 'novo.html')
+
+
 
 def editar(request, i):
     try:
@@ -25,19 +29,26 @@ def editar(request, i):
         if request.POST:
             n = str(request.POST.get('nome'))
             e = str(request.POST.get('email'))
+            i =  request.FILES['imagem']
             c.nome = n
             c.email = e
-            
+            if i != "":
+                c.imagem = i
+                
             c.save()
             messages.success(request, "Objeto salvo com sucesso")
             return redirect('contato:inicio')
         else:
             return render(request, 'editar.html', {'c': c})    
-    except Exception as e:
-        print(e)
-        messages.error(request, 'Não foi possível editar o contato')
+    except MultiValueDictKeyError  as e:
+        messages.success(request, "Objeto salvo com sucesso")
         return redirect('contato:inicio')
-    
+    except Exception as e:
+        messages.error(request, "Objeto não salvo")
+        return redirect('contato:inicio')
+
+
+
     
     
 
