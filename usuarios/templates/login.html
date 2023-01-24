@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{%block conteudo%}
+    <h1>Login</h1> 
+    <form action="" method="POST">
+        {% csrf_token %}
+        <div class="form-group">
+          <label for="email">Email address</label>
+          <input type="email" class="form-control" id="email" name="email" required placeholder="Digire o email">          
+        </div>
+        <div class="form-group">
+          <label for="senha">Password</label>
+          <input type="password" class="form-control" id="senha" name="senha" required placeholder="Senha">
+        </div>
+        <div class="form-group my-3">
+            <button type="submit" class="btn btn-primary btn">Entrar</button>
+        </div>
+        <div class="form-group">
+            <a href="{% url 'usuarios:cadastrese'%}"> Ainda não possui cadastro?</a>
+        </div>
+        <div class="form-group">
+            <a href="{% url 'usuarios:recuperarsenha'%}"> Esqueceu a senha?</a>
+        </div>
+
+      </form>
+      {% if messages %}
+    <hr/>
+    <h1>Avisos:</h1>
+    <ul class="messages">
+        {% for message in messages %}
+            <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+{%endblock%}

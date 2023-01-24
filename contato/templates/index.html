@@ -1,15 +1,24 @@
-
-
 {%extends 'base.html' %}
-{%block titulo %}: Lista{%endblock%}
 {%block conteudo %}
     <h1>Contatos</h1>
+
     {% if lista|length > 0 %}
-        <ul>
-            {%for c in lista %}
-                <li>{{c}} | <a href="{% url 'contato:editar' i=c.id %}"> Editar</a> | <a href="{% url 'contato:excluir'  i=c.id %}">Excluir</a></li>
-            {%endfor%}
-        </ul>
+        
+            <div class=" row row-cols-1 row-cols-sm-2 row-cols-md-4">
+                {%for c in lista %}
+                    <div class="col">
+                        <div class="card mb-3">
+                            <img src="/media/{{c.imagem}}" class="card-img-top min-150 img-fluid" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">{{c.nome}}</h5>
+                                <p class="card-text">{{c.email}}</p>
+                                <p class="card-text"><small class="text-muted"><a class="btn btn-primary" href="{% url 'contato:editar' i=c.id %}"> Editar</a> <a  class="btn btn-danger" href="{% url 'contato:excluir'  i=c.id %}">Excluir</a></small></p>
+                            </div>
+                        </div>
+                    </div>
+                {%endfor%}
+            </div>
+        
         Total de contatos: {{ lista|length }} | 
         <a href="{% url 'contato:novo' %}">Adicionar Novo</a>
     {% else %}

@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{%block conteudo%}
+    <h1>Cadastro de Usuário</h1> 
+    <form action="" method="POST">
+        {% csrf_token %}
+        <div class="form-group">
+          <label for="email">Nome</label>
+          <input type="text" class="form-control" id="text" name="nome" placeholder="Digire o nome">          
+        </div>
+        <div class="form-group">
+          <label for="email">E-mail</label>
+          <input type="email" class="form-control" id="email" name="email" placeholder="Digire o email">          
+        </div>
+        <div class="form-group">
+          <label for="senha">Senha</label>
+          <input type="password" class="form-control" id="senha" name="senha" placeholder="Senha">
+        </div>
+       
+        <div class="form-group my-3">
+            <button type="submit" class="btn btn-primary btn">Salvar</button>
+        </div>
+        <div class="form-group">
+            <a href="{% url 'usuarios:entrar'%}"> Cancelar</a>
+        </div>
+        
+      </form>
+      {% if messages %}
+      <hr/>
+      <h1>Avisos:</h1>
+      <ul class="messages">
+          {% for message in messages %}
+              <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+          {% endfor %}
+      </ul>
+      {% endif %}
+{%endblock%}

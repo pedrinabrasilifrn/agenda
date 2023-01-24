@@ -1,0 +1,19 @@
+.min-150{
+    min-height: 150px;
+    object-fit:cover;
+    object-position: right;
+}
+.collapse ul{
+    text-align: end;
+    margin-left: auto;
+    transition: all 0.5s;
+}
+
+.collapse.show ul{
+    text-align: left !important;
+
+}
+.collapse.show ul{
+    margin-left: auto;
+    margin-right: auto;    
+}
