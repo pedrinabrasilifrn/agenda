@@ -1,29 +1,28 @@
 
 
 {%extends 'base.html' %}
-{%load static%}
+{%block titulo %}: Lista{%endblock%}
 {%block conteudo %}
-<h1>Contatos</h1>
-
-        {% if lista|length > 0 %}
-            <ul>
-                {%for c in lista %}
-                    <li>{{c}} | <a href="{% url 'contato:editar' i=c.id %}"> Editar</a> | <a href="{% url 'contato:excluir'  i=c.id %}">Excluir</a></li>
-                {%endfor%}
-            </ul>
-            Total de contatos: {{ lista|length }} | 
-            <a href="{% url 'contato:novo' %}">Adicionar Novo</a>
-        {% else %}
-            <p> Nenhum contato cadastrado </p>
-        {% endif %}
-
-        {% if messages %}
-        <hr/>
-        <h1>Avisos:</h1>
-        <ul class="messages">
-            {% for message in messages %}
-                <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-            {% endfor %}
+    <h1>Contatos</h1>
+    {% if lista|length > 0 %}
+        <ul>
+            {%for c in lista %}
+                <li>{{c}} | <a href="{% url 'contato:editar' i=c.id %}"> Editar</a> | <a href="{% url 'contato:excluir'  i=c.id %}">Excluir</a></li>
+            {%endfor%}
         </ul>
-        {% endif %}
+        Total de contatos: {{ lista|length }} | 
+        <a href="{% url 'contato:novo' %}">Adicionar Novo</a>
+    {% else %}
+        <p> Nenhum contato cadastrado </p>
+    {% endif %}
+
+    {% if messages %}
+    <hr/>
+    <h1>Avisos:</h1>
+    <ul class="messages">
+        {% for message in messages %}
+            <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
 {%endblock%}

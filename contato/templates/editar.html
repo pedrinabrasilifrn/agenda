@@ -1,19 +1,15 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Novo</title>
-    </head>
-    <body>
-        <h1>Editar: {{c.id}}</h1>
-        <form action="" method="POST" enctype="multipart/form-data">
-            {% csrf_token %}
-            <input type="text" name="id" required readonly value='{{c.id|default_if_none:"0"}}'/>
-            <input type="text" name="nome" required value='{{c.nome|default_if_none:"Sem nome"}}'/>
-            <input type="email" name="email" required value='{{c.email|default_if_none:""}}'/>
-            <img src="/media/{{c.imagem}}"/>
-            <input type="file" name="imagem"/>
-            <input type="submit" value="Salvar"/>
-            <input type="button" value="Cancelar" onclick="window.location.href='/'"/>
-        </form>
-    </body>
-</html>
+{%extends 'base.html'%}
+{%block titulo %}: Editar{%endblock%}
+{%block conteudo %}
+    <h1>Editar: {{c.id}}</h1>
+    <form action="" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="text" name="id" required readonly value='{{c.id|default_if_none:"0"}}'/>
+        <input type="text" name="nome" required value='{{c.nome|default_if_none:"Sem nome"}}'/>
+        <input type="email" name="email" required value='{{c.email|default_if_none:""}}'/>
+        <img src="/media/{{c.imagem}}"/>
+        <input type="file" name="imagem"/>
+        <input type="submit" value="Salvar"/>
+        <input type="button" value="Cancelar" onclick="window.location.href='/'"/>
+    </form>
+{%endblock%}
