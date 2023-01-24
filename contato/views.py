@@ -29,12 +29,11 @@ def editar(request, i):
         if request.POST:
             n = str(request.POST.get('nome'))
             e = str(request.POST.get('email'))
-            i =  request.FILES['imagem']
+            i = request.FILES['imagem']
             c.nome = n
             c.email = e
             if i != "":
                 c.imagem = i
-                
             c.save()
             messages.success(request, "Objeto salvo com sucesso")
             return redirect('contato:inicio')
@@ -46,10 +45,6 @@ def editar(request, i):
     except Exception as e:
         messages.error(request, "Objeto não salvo")
         return redirect('contato:inicio')
-
-
-
-    
     
 
 def excluir(request, i):
