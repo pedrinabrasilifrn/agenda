@@ -3,12 +3,14 @@ from django.template import RequestContext
 from .models import Contato
 from django.contrib import messages
 from django.utils.datastructures import MultiValueDictKeyError
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 def index(request):
     lista = Contato.objects.all()
     return render(request, 'index.html', {'lista': lista})
 
+@login_required(login_url="/usuarios/entrar")
 def novo(request):
     if request.POST:
         n = str(request.POST.get('nome'))
@@ -22,7 +24,7 @@ def novo(request):
         return render(request, 'novo.html')
 
 
-
+@login_required(login_url="/usuarios/entrar")
 def editar(request, i):
     try:
         c = Contato.objects.get(pk= i)
@@ -46,7 +48,7 @@ def editar(request, i):
         messages.error(request, "Objeto não salvo")
         return redirect('contato:inicio')
     
-
+@login_required(login_url="/usuarios/entrar")
 def excluir(request, i):
     try:
         c = Contato.objects.get(pk=i)        

@@ -1,37 +1,31 @@
-{%extends 'base.html' %}
-{%block conteudo %}
-    <h1>Contatos</h1>
+{%extends 'base.html' %} {%block conteudo %}
+<h1>Contatos</h1>
+{%if user.is_authenticated %}
+<a href="{% url 'contato:novo' %}">Adicionar Novo</a> {%endif%} {% if lista|length > 0 %}
 
-    {% if lista|length > 0 %}
-        
-            <div class=" row row-cols-1 row-cols-sm-2 row-cols-md-4">
-                {%for c in lista %}
-                    <div class="col">
-                        <div class="card mb-3">
-                            <img src="/media/{{c.imagem}}" class="card-img-top min-150 img-fluid" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">{{c.nome}}</h5>
-                                <p class="card-text">{{c.email}}</p>
-                                <p class="card-text"><small class="text-muted"><a class="btn btn-primary" href="{% url 'contato:editar' i=c.id %}"> Editar</a> <a  class="btn btn-danger" href="{% url 'contato:excluir'  i=c.id %}">Excluir</a></small></p>
-                            </div>
-                        </div>
-                    </div>
-                {%endfor%}
+<div class=" row row-cols-1 row-cols-sm-2 row-cols-md-4">
+    {%for c in lista %}
+    <div class="col">
+        <div class="card mb-3">
+            <img src="/media/{{c.imagem}}" class="card-img-top min-150 img-fluid" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">{{c.nome}}</h5>
+                <p class="card-text">{{c.email}}</p>
+                <p class="card-text"><small class="text-muted"><a class="btn btn-primary" href="{% url 'contato:editar' i=c.id %}"> Editar</a> <a  class="btn btn-danger" href="{% url 'contato:excluir'  i=c.id %}">Excluir</a></small></p>
             </div>
-        
-        Total de contatos: {{ lista|length }} | 
-        <a href="{% url 'contato:novo' %}">Adicionar Novo</a>
-    {% else %}
-        <p> Nenhum contato cadastrado </p>
-    {% endif %}
+        </div>
+    </div>
+    {%endfor%}
+</div>
 
-    {% if messages %}
-    <hr/>
-    <h1>Avisos:</h1>
-    <ul class="messages">
-        {% for message in messages %}
-            <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-        {% endfor %}
-    </ul>
-    {% endif %}
-{%endblock%}
+Total de contatos: {{ lista|length }} | {% else %}
+<p> Nenhum contato cadastrado </p>
+{% endif %} {% if messages %}
+<hr/>
+<h1>Avisos:</h1>
+<ul class="messages">
+    {% for message in messages %}
+    <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %} {%endblock%}
