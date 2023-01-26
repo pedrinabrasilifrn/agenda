@@ -1,0 +1,12 @@
+{%extends 'base.html'%} {%block titulo %}: Detalhar{%endblock%} {%block conteudo %}
+<h1>Detalhes: {{c.id}}</h1>
+<div>
+
+    <input type="text" name="id" required readonly value='{{c.id|default_if_none:"0"}}' />
+    <input type="text" name="nome" required value='{{c.nome|default_if_none:"Sem nome"}}' />
+    <input type="email" name="email" required value='{{c.email|default_if_none:""}}' />
+    <img src="/media/{{c.imagem}}" />
+
+    <input type="button" value="Voltar" onclick="window.location.href='/'" />
+</div>
+{%endblock%}

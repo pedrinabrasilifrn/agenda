@@ -24,6 +24,10 @@ def novo(request):
         return render(request, 'novo.html')
 
 
+def detalhar(request, i):
+    c = Contato.objects.get(pk= i)
+    return render(request, 'detalhar.html', {'c': c})    
+    
 @login_required(login_url="/usuarios/entrar")
 def editar(request, i):
     try:

@@ -11,7 +11,15 @@
             <div class="card-body">
                 <h5 class="card-title">{{c.nome}}</h5>
                 <p class="card-text">{{c.email}}</p>
-                <p class="card-text"><small class="text-muted"><a class="btn btn-primary" href="{% url 'contato:editar' i=c.id %}"> Editar</a> <a  class="btn btn-danger" href="{% url 'contato:excluir'  i=c.id %}">Excluir</a></small></p>
+                <p class="card-text"><small class="text-muted">
+                    {%if user.is_authenticated %}
+                    <a class="btn btn-primary" href="{% url 'contato:editar' i=c.id %}"> Editar</a> 
+                    <a  class="btn btn-danger" href="{% url 'contato:excluir'  i=c.id %}">Excluir</a>
+                    {%else%}
+                    <a class="btn btn-primary" href="{% url 'contato:detalhar' i=c.id %}"> Detalhar</a>
+                    {%endif%}
+                </small>
+                </p>
             </div>
         </div>
     </div>
