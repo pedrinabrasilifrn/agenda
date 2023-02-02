@@ -4,18 +4,16 @@ from django.contrib import messages
 from django.contrib.auth.models import User
 # Create your views here.
 def entrar(request):
-    
     if request.POST:
         email = request.POST.get('email')
         senha = request.POST.get('senha')
-        # Use a autenficação do Django
+        # Use a autenticação do Django
         usu = authenticate(username=email, password=senha)
-        
         # Se tem usuario
         if usu:
             #Checa se usuario esta ativo, é necessario para o futuro, caso voce destive o usuario ele não ira mais logar
             if usu.is_active:
-                  # Logando.
+                # Logando.
                 login(request,usu)
                 # SE LOGAR,Redireciona o usuario para uma pagina , nesse caso a Index .
                 return redirect('contato:inicio')
