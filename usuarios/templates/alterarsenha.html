@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{%block conteudo%}
+    <h1>Alterar Senha</h1> 
+    <form action="" method="POST">
+        {% csrf_token %}
+        <div class="form-group">
+          <label for="senha">Senha Antiga:</label>
+          <input type="password" class="form-control" id="senha" name="senha_ant" placeholder="Senha Anterior">
+        </div>
+        <div class="form-group">
+          <label for="senha">Nova Senha:</label>
+          <input type="password" class="form-control" id="senha" name="senha_nova" placeholder="Nova Senha">
+        </div>
+        <div class="form-group my-3">
+            <button type="submit" class="btn btn-primary btn">Salvar</button>
+        </div>
+        <div class="form-group">
+            <a href="{% url 'usuarios:meuperfil'%}"> Cancelar</a>
+        </div>
+        
+      </form>
+      {% if messages %}
+      <hr/>
+      <h1>Avisos:</h1>
+      <ul class="messages">
+          {% for message in messages %}
+              <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+          {% endfor %}
+      </ul>
+      {% endif %}
+{%endblock%}
